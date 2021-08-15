@@ -47,7 +47,7 @@ public class Level : Singleton<Level>
 
         if (spawnedEntity.GetType() == typeof(Player))
         {
-            spawnedEntity.OnDeath += delegate { OnAllEnemiesDied.RemoveAllListeners(); OnPlayerDied?.Invoke();};
+            spawnedEntity.OnDeath += delegate { OnPlayerDied?.Invoke(); };
         }
 
         else if (spawnedEntity.GetType() == typeof(Enemy))
@@ -58,7 +58,6 @@ public class Level : Singleton<Level>
                 _liveEnemies.Remove((Enemy)spawnedEntity);
                 if (_liveEnemies.Count == 0)
                 {
-                    OnPlayerDied.RemoveAllListeners();
                     OnAllEnemiesDied?.Invoke();
                 }
             };
